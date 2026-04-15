@@ -14,10 +14,10 @@ public partial class Menu : Control
 
 	public override void _Ready()
 	{
-		_newGameBtn = GetNode<Button>("VBoxContainer/NewGameBtn");
-		_loadGameBtn = GetNode<Button>("VBoxContainer/LoadGameBtn");
-		_exitBtn = GetNode<Button>("VBoxContainer/ExitBtn");
-		_statusLabel = GetNode<Label>("VBoxContainer/StatusLabel");
+		_newGameBtn = GetNode<Button>("CenterContainer/VBoxContainer/NewGameBtn");
+		_loadGameBtn = GetNode<Button>("CenterContainer/VBoxContainer/LoadGameBtn");
+		_exitBtn = GetNode<Button>("CenterContainer/VBoxContainer/ExitBtn");
+		_statusLabel = GetNode<Label>("CenterContainer/VBoxContainer/StatusLabel");
 
 		_newGameBtn.Pressed += OnNewGamePressed;
 		_loadGameBtn.Pressed += OnLoadGamePressed;
@@ -51,8 +51,8 @@ public partial class Menu : Control
 				GD.Print($"DEBUG: Nenhum save anterior encontrado");
 			}
 
-			GD.Print("DEBUG: Tentando ir para Game.tscn...");
-			var error = GetTree().ChangeSceneToFile("res://Game.tscn");
+			GD.Print("DEBUG: Tentando ir para Main.tscn...");
+			var error = GetTree().ChangeSceneToFile("res://Main.tscn");
 			GD.Print($"DEBUG: ChangeSceneToFile retornou: {error}");
 
 			if (error != Error.Ok)
@@ -92,4 +92,3 @@ public partial class Menu : Control
 		GetTree().Quit();
 	}
 }
-
