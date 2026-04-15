@@ -1,0 +1,76 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Main.cs" id="1_6x2rh"]
+
+[node name="Game" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6x2rh")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="DiaLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Dia: 1/5"
+theme_override_font_sizes/font_size = 24
+
+[node name="PetSprite" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="FomeLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Fome: 100"
+
+[node name="FelicidadeLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Felicidade: 100"
+
+[node name="EnergiaLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Energia: 100"
+
+[node name="EstadoLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Estado: Feliz :)"
+
+[node name="AlimentarBtn" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Alimentar"
+
+[node name="BrincarBtn" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Brincar"
+
+[node name="DormirBtn" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Dormir"
+
+[node name="NovoCicloBtn" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Novo Ciclo"
+
+[node name="VoltarMenuBtn" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Voltar ao Menu"
+

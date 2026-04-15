@@ -32,6 +32,35 @@ public class PetStatus
         Limitar();
     }
 
+    public void ApplyElapsed(System.TimeSpan elapsed, double tickSeconds)
+    {
+        if (!IsAlive || tickSeconds <= 0)
+        {
+            return;
+        }
+
+        var ticks = (int)(elapsed.TotalSeconds / tickSeconds);
+        for (var i = 0; i < ticks && IsAlive; i++)
+        {
+            Tick();
+        }
+    }
+
+    public void LoadStatus(int fome, int felicidade, int energia)
+    {
+        Fome = fome;
+        Felicidade = felicidade;
+        Energia = energia;
+        Limitar();
+    }
+
+    public void ResetStatus()
+    {
+        Fome = 100;
+        Felicidade = 100;
+        Energia = 100;
+    }
+
     public void Alimentar()
     {
         if (!IsAlive)
@@ -92,5 +121,3 @@ public class PetStatus
         return value;
     }
 }
-
-
