@@ -31,8 +31,8 @@ public partial class Main : Control
 	private Button _alimentarBtn = null!;
 	private Button _brincarBtn = null!;
 	private Button _dormirBtn = null!;
-	private Button _novoCicloBtn = null!;
-	private Button _voltarMenuBtn = null!;
+	private Button _saveGameBtn = null!;
+	private Button? _voltarMenuBtn;
 
 	private Timer _timer = null!;
 	private DateTime _startUtc;
@@ -51,14 +51,17 @@ public partial class Main : Control
 		_alimentarBtn = GetNode<Button>("MarginContainer/VBoxContainer/AlimentarBtn");
 		_brincarBtn = GetNode<Button>("MarginContainer/VBoxContainer/BrincarBtn");
 		_dormirBtn = GetNode<Button>("MarginContainer/VBoxContainer/DormirBtn");
-		_novoCicloBtn = GetNode<Button>("MarginContainer/VBoxContainer/NovoCicloBtn");
-		_voltarMenuBtn = GetNode<Button>("MarginContainer/VBoxContainer/VoltarMenuBtn");
+		_saveGameBtn = GetNode<Button>("MarginContainer/VBoxContainer/SaveGameBtn");
+		_voltarMenuBtn = GetNodeOrNull<Button>("MarginContainer/VBoxContainer/VoltarMenuBtn");
 
 		_alimentarBtn.Pressed += OnAlimentarBtnPressed;
 		_brincarBtn.Pressed += OnBrincarBtnPressed;
 		_dormirBtn.Pressed += OnDormirBtnPressed;
-		_novoCicloBtn.Pressed += OnNovoCicloBtnPressed;
-		_voltarMenuBtn.Pressed += OnVoltarMenuBtnPressed;
+		_saveGameBtn.Pressed += OnSaveGameBtnPressed;
+		if (_voltarMenuBtn != null)
+		{
+			_voltarMenuBtn.Pressed += OnVoltarMenuBtnPressed;
+		}
 
 		LoadPetSprites();
 		LoadOrCreateGame();
@@ -177,13 +180,10 @@ public partial class Main : Control
 		SaveGame();
 	}
 
-	private void OnNovoCicloBtnPressed()
+	private void OnSaveGameBtnPressed()
 	{
-		_startUtc = DateTime.UtcNow;
-		_lastSeenUtc = DateTime.UtcNow;
-		_pet.ResetStatus();
-		AtualizarUi();
 		SaveGame();
+		_estadoLabel.Text += "\nJogo salvo!";
 	}
 
 	private void OnVoltarMenuBtnPressed()

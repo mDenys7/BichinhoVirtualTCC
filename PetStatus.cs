@@ -2,11 +2,21 @@ namespace BichinhoVirtualTCC;
 
 public class PetStatus
 {
-    public int Fome { get; private set; } = 100;
-    public int Felicidade { get; private set; } = 100;
-    public int Energia { get; private set; } = 100;
+    private const double HungerDecayPerTick = 100.0 / 43200.0;
+    private const double HappinessDecayPerTick = 70.0 / 43200.0;
+    private const double EnergyDecayPerTick = 55.0 / 43200.0;
+    private const double LowHungerPenaltyPerTick = 20.0 / 43200.0;
+    private const double LowEnergyPenaltyPerTick = 15.0 / 43200.0;
 
-    public bool IsAlive => Fome > 0 && Felicidade > 0 && Energia > 0;
+    private double _fomeValue = 100;
+    private double _felicidadeValue = 100;
+    private double _energiaValue = 100;
+
+    public int Fome => ToDisplay(_fomeValue);
+    public int Felicidade => ToDisplay(_felicidadeValue);
+    public int Energia => ToDisplay(_energiaValue);
+
+    public bool IsAlive => _fomeValue > 0 && _felicidadeValue > 0 && _energiaValue > 0;
 
     public void Tick()
     {
@@ -15,18 +25,18 @@ public class PetStatus
             return;
         }
 
-        Fome -= 4;
-        Felicidade -= 3;
-        Energia -= 2;
+        _fomeValue -= HungerDecayPerTick;
+        _felicidadeValue -= HappinessDecayPerTick;
+        _energiaValue -= EnergyDecayPerTick;
 
-        if (Fome < 30)
+        if (_fomeValue < 30)
         {
-            Felicidade -= 2;
+            _felicidadeValue -= LowHungerPenaltyPerTick;
         }
 
-        if (Energia < 20)
+        if (_energiaValue < 20)
         {
-            Felicidade -= 2;
+            _felicidadeValue -= LowEnergyPenaltyPerTick;
         }
 
         Limitar();
@@ -48,17 +58,17 @@ public class PetStatus
 
     public void LoadStatus(int fome, int felicidade, int energia)
     {
-        Fome = fome;
-        Felicidade = felicidade;
-        Energia = energia;
+        _fomeValue = fome;
+        _felicidadeValue = felicidade;
+        _energiaValue = energia;
         Limitar();
     }
 
     public void ResetStatus()
     {
-        Fome = 100;
-        Felicidade = 100;
-        Energia = 100;
+        _fomeValue = 100;
+        _felicidadeValue = 100;
+        _energiaValue = 100;
     }
 
     public void Alimentar()
@@ -68,8 +78,8 @@ public class PetStatus
             return;
         }
 
-        Fome += 20;
-        Energia -= 4;
+        _fomeValue += 20;
+        _energiaValue -= 4;
         Limitar();
     }
 
@@ -80,9 +90,9 @@ public class PetStatus
             return;
         }
 
-        Felicidade += 20;
-        Energia -= 10;
-        Fome -= 6;
+        _felicidadeValue += 20;
+        _energiaValue -= 10;
+        _fomeValue -= 6;
         Limitar();
     }
 
@@ -93,20 +103,20 @@ public class PetStatus
             return;
         }
 
-        Energia += 25;
-        Fome -= 10;
-        Felicidade += 3;
+        _energiaValue += 25;
+        _fomeValue -= 10;
+        _felicidadeValue += 3;
         Limitar();
     }
 
     public void Limitar()
     {
-        Fome = Clamp(Fome);
-        Felicidade = Clamp(Felicidade);
-        Energia = Clamp(Energia);
+        _fomeValue = Clamp(_fomeValue);
+        _felicidadeValue = Clamp(_felicidadeValue);
+        _energiaValue = Clamp(_energiaValue);
     }
 
-    private static int Clamp(int value)
+    private static double Clamp(double value)
     {
         if (value < 0)
         {
@@ -119,5 +129,10 @@ public class PetStatus
         }
 
         return value;
+    }
+
+    private static int ToDisplay(double value)
+    {
+        return (int)System.Math.Round(value, System.MidpointRounding.AwayFromZero);
     }
 }

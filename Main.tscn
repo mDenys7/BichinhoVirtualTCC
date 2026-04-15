@@ -66,7 +66,11 @@ text = "Brincar"
 layout_mode = 2
 text = "Dormir"
 
-[node name="NovoCicloBtn" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="SaveGameBtn" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Novo Ciclo"
+text = "Save Game"
+
+[node name="VoltarMenuBtn" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Voltar ao Menu"
 
