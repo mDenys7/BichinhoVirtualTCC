@@ -25,6 +25,12 @@ public partial class Main : Control
 		{ PetStatus.FinalState.Evil, "res://sprites/pet_day_3_evil.png" }
 	};
 
+	private static readonly string[] FaintedSprites =
+	{
+		"res://sprites/pet_day_1_fainted.png",
+		"res://sprites/pet_day_2_fainted.png"
+	};
+
 	private readonly PetStatus _pet = new();
 
 	private Label _fomeLabel = null!;
@@ -322,6 +328,20 @@ public partial class Main : Control
 		}
 
 		var dayIndex = GetCurrentDayIndex();
+		
+		// Se o pet está desmaiado, mostra o sprite de desmaiado
+		if (!_pet.IsAlive)
+		{
+			if (dayIndex < FaintedSprites.Length)
+			{
+				var faintedTexture = ResourceLoader.Load<Texture2D>(FaintedSprites[dayIndex]);
+				if (faintedTexture != null)
+				{
+					_petSprite.Texture = faintedTexture;
+					return;
+				}
+			}
+		}
 		
 		// Se é o último dia, usa o sprite baseado no estado final
 		if (dayIndex >= 2) // Dia 3 (índice 2)
