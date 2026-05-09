@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://5g1vdm8wyx5h"]
 
-[ext_resource type="Script" path="res://Main.cs" id="1_6x2rh"]
+[ext_resource type="Script" uid="uid://duiqdq5boqnui" path="res://Main.cs" id="1_6x2rh"]
+[ext_resource type="Texture2D" uid="uid://cq80fssqvdkk3" path="res://sprites/pet_day_1.png" id="2_uu6xs"]
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -29,12 +30,13 @@ theme_override_constants/separation = 10
 
 [node name="DiaLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Dia: 1/5"
 theme_override_font_sizes/font_size = 24
+text = "Dia: 1/5"
 
 [node name="PetSprite" type="TextureRect" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(180, 180)
 layout_mode = 2
+texture = ExtResource("2_uu6xs")
 expand_mode = 1
 stretch_mode = 5
 
@@ -73,4 +75,3 @@ text = "Save Game"
 [node name="VoltarMenuBtn" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Voltar ao Menu"
-

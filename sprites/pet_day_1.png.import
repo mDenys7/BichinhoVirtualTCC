@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gjtnlb5f4h6k"
-path="res://.godot/imported/pet_day_2.svg-eb84f3f8039411830ce2f70c2ece27b3.ctex"
+uid="uid://cq80fssqvdkk3"
+path="res://.godot/imported/pet_day_1.png-5ff025f412d20c35302e94eab9c3a5a0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/pet_day_2.svg"
-dest_files=["res://.godot/imported/pet_day_2.svg-eb84f3f8039411830ce2f70c2ece27b3.ctex"]
+source_file="res://sprites/pet_day_1.png"
+dest_files=["res://.godot/imported/pet_day_1.png-5ff025f412d20c35302e94eab9c3a5a0.ctex"]
 
 [params]
 
@@ -38,6 +38,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false
