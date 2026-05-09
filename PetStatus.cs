@@ -135,4 +135,29 @@ public class PetStatus
     {
         return (int)System.Math.Round(value, System.MidpointRounding.AwayFromZero);
     }
+
+    public enum FinalState
+    {
+        Good,
+        Neutral,
+        Evil
+    }
+
+    public FinalState GetFinalState()
+    {
+        // Score baseado em felicidade (mais importante) e energia (menos importante), penalidade por fome
+        var score = (_felicidadeValue * 0.5) + (_energiaValue * 0.3) - (_fomeValue * 0.2);
+        
+        if (score >= 60)
+        {
+            return FinalState.Good;
+        }
+        
+        if (score <= 30)
+        {
+            return FinalState.Evil;
+        }
+        
+        return FinalState.Neutral;
+    }
 }

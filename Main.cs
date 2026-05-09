@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 
@@ -12,9 +13,16 @@ public partial class Main : Control
 	private const string SaveFileName = "pet_save.json";
 	private static readonly string[] PetSpritePaths =
 	{
-		"res://sprites/pet_day_1.svg",
-		"res://sprites/pet_day_2.svg",
-		"res://sprites/pet_day_3.svg",
+		"res://sprites/pet_day_1.png",
+		"res://sprites/pet_day_2.png",
+		"res://sprites/pet_day_3_neutral.png"
+	};
+
+	private static readonly Dictionary<PetStatus.FinalState, string> FinalDaySprites = new()
+	{
+		{ PetStatus.FinalState.Good, "res://sprites/pet_day_3_good.png" },
+		{ PetStatus.FinalState.Neutral, "res://sprites/pet_day_3_neutral.png" },
+		{ PetStatus.FinalState.Evil, "res://sprites/pet_day_3_evil.png" }
 	};
 
 	private readonly PetStatus _pet = new();
@@ -202,7 +210,7 @@ public partial class Main : Control
 		_energiaLabel.Text = $"Energia: {_pet.Energia}";
 
 		var currentDay = GetCurrentDayIndex() + 1;
-		_diaLabel.Text = $"Dia: {currentDay}/5";
+		_diaLabel.Text = $"Dia: {currentDay}/3";
 
 		UpdatePetSprite();
 
@@ -219,7 +227,7 @@ public partial class Main : Control
 
 		if (DateTime.UtcNow >= _startUtc + TotalGameDuration)
 		{
-			_estadoLabel.Text = $"Estado: Ciclo de 5 dias finalizado!\n{tempoRestante}";
+			_estadoLabel.Text = $"Estado: Ciclo de 3 dias finalizado!\n{tempoRestante}";
 		}
 		else
 		{
@@ -314,6 +322,20 @@ public partial class Main : Control
 		}
 
 		var dayIndex = GetCurrentDayIndex();
+		
+		// Se é o último dia, usa o sprite baseado no estado final
+		if (dayIndex >= 2) // Dia 3 (índice 2)
+		{
+			var finalState = _pet.GetFinalState();
+			var finalSpritePath = FinalDaySprites[finalState];
+			var finalTexture = ResourceLoader.Load<Texture2D>(finalSpritePath);
+			if (finalTexture != null)
+			{
+				_petSprite.Texture = finalTexture;
+				return;
+			}
+		}
+
 		for (var i = dayIndex; i >= 0; i--)
 		{
 			if (_petDayTextures[i] != null)
