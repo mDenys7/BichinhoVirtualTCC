@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://5g1vdm8wyx5h"]
+[gd_scene load_steps=2 format=3 uid="uid://5g1vdm8wyx5h"]
 
 [ext_resource type="Script" uid="uid://duiqdq5boqnui" path="res://Main.cs" id="1_6x2rh"]
-[ext_resource type="Texture2D" uid="uid://cq80fssqvdkk3" path="res://sprites/pet_day_1.png" id="2_uu6xs"]
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -27,16 +26,34 @@ theme_override_constants/margin_bottom = 24
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
+alignment = 1
+size_flags_horizontal = 3
 
 [node name="DiaLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Dia: 1/5"
 
-[node name="PetSprite" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+[node name="PetCenter" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PetHolder" type="Control" parent="MarginContainer/VBoxContainer/PetCenter"]
 custom_minimum_size = Vector2(180, 180)
 layout_mode = 2
-texture = ExtResource("2_uu6xs")
+size_flags_horizontal = 3
+
+[node name="PetSprite" type="TextureRect" parent="MarginContainer/VBoxContainer/PetCenter/PetHolder"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90
+offset_top = -90
+offset_right = 90
+offset_bottom = 90
 expand_mode = 1
 stretch_mode = 5
 

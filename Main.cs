@@ -39,6 +39,8 @@ public partial class Main : Control
 	private Label _estadoLabel = null!;
 	private Label _diaLabel = null!;
 	private TextureRect _petSprite = null!;
+	private Vector2 _petBasePosition;
+	private Tween? _idleTween;
 
 	private Button _alimentarBtn = null!;
 	private Button _brincarBtn = null!;
@@ -58,7 +60,9 @@ public partial class Main : Control
 		_energiaLabel = GetNode<Label>("MarginContainer/VBoxContainer/EnergiaLabel");
 		_estadoLabel = GetNode<Label>("MarginContainer/VBoxContainer/EstadoLabel");
 		_diaLabel = GetNode<Label>("MarginContainer/VBoxContainer/DiaLabel");
-		_petSprite = GetNode<TextureRect>("MarginContainer/VBoxContainer/PetSprite");
+		_petSprite = GetNode<TextureRect>("MarginContainer/VBoxContainer/PetCenter/PetHolder/PetSprite");
+
+		StartIdleAnimation();
 
 		_alimentarBtn = GetNode<Button>("MarginContainer/VBoxContainer/AlimentarBtn");
 		_brincarBtn = GetNode<Button>("MarginContainer/VBoxContainer/BrincarBtn");
@@ -388,6 +392,36 @@ public partial class Main : Control
 		}
 
 		return dayIndex;
+	}
+
+	private void StartIdleAnimation()
+	{
+		_idleTween?.Kill();
+		_petBasePosition = _petSprite.Position;
+
+		var tween = CreateTween();
+		_idleTween = tween;
+		tween.SetLoops();
+
+		var step = 0.2f;
+		var ease = Tween.EaseType.InOut;
+		var trans = Tween.TransitionType.Sine;
+
+		tween.TweenProperty(_petSprite, "position", _petBasePosition + new Vector2(5, 0), step)
+			.SetEase(ease)
+			.SetTrans(trans);
+		tween.TweenProperty(_petSprite, "position", _petBasePosition + new Vector2(-5, 0), step)
+			.SetEase(ease)
+			.SetTrans(trans);
+		tween.TweenProperty(_petSprite, "position", _petBasePosition + new Vector2(0, -5), step)
+			.SetEase(ease)
+			.SetTrans(trans);
+		tween.TweenProperty(_petSprite, "position", _petBasePosition + new Vector2(0, 5), step)
+			.SetEase(ease)
+			.SetTrans(trans);
+		tween.TweenProperty(_petSprite, "position", _petBasePosition, step)
+			.SetEase(ease)
+			.SetTrans(trans);
 	}
 
 	private sealed class SaveData
