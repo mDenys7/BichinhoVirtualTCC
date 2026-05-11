@@ -332,6 +332,12 @@ public partial class Main : Control
 		}
 
 		var dayIndex = GetCurrentDayIndex();
+
+		if (!_pet.IsAlive)
+		{
+			_idleTween?.Kill();
+			_petSprite.Position = _petBasePosition;
+		}
 		
 		// Se o pet está desmaiado, mostra o sprite de desmaiado
 		if (!_pet.IsAlive)
@@ -403,23 +409,63 @@ public partial class Main : Control
 		_idleTween = tween;
 		tween.SetLoops();
 
-		var step = 0.2f;
+		var step = 0.25f;
 		var ease = Tween.EaseType.InOut;
 		var trans = Tween.TransitionType.Sine;
+		var dx = 6f;
+		var dy = 4f;
+		var basePos = _petBasePosition;
 
-		tween.TweenProperty(_petSprite, "position", _petBasePosition + new Vector2(5, 0), step)
+		var p1 = basePos + new Vector2(dx, 0);
+		var p2 = basePos + new Vector2(dx * 2, 0);
+		var p3 = basePos + new Vector2(dx * 3, 0);
+		var p4 = basePos + new Vector2(dx * 2, 0);
+		var p5 = basePos + new Vector2(dx, 0);
+		var p6 = basePos + new Vector2(dx, -dy);
+		var p7 = basePos + new Vector2(-dx, 0);
+		var p8 = basePos + new Vector2(-dx * 2, 0);
+		var p9 = basePos + new Vector2(-dx * 3, 0);
+		var p10 = basePos + new Vector2(-dx * 2, 0);
+		var p11 = basePos + new Vector2(-dx, 0);
+		var p12 = basePos + new Vector2(-dx, -dy);
+
+		tween.TweenProperty(_petSprite, "position", p1, step)
 			.SetEase(ease)
 			.SetTrans(trans);
-		tween.TweenProperty(_petSprite, "position", _petBasePosition + new Vector2(-5, 0), step)
+		tween.TweenProperty(_petSprite, "position", p2, step)
 			.SetEase(ease)
 			.SetTrans(trans);
-		tween.TweenProperty(_petSprite, "position", _petBasePosition + new Vector2(0, -5), step)
+		tween.TweenProperty(_petSprite, "position", p3, step)
 			.SetEase(ease)
 			.SetTrans(trans);
-		tween.TweenProperty(_petSprite, "position", _petBasePosition + new Vector2(0, 5), step)
+		tween.TweenProperty(_petSprite, "position", p4, step)
 			.SetEase(ease)
 			.SetTrans(trans);
-		tween.TweenProperty(_petSprite, "position", _petBasePosition, step)
+		tween.TweenProperty(_petSprite, "position", p5, step)
+			.SetEase(ease)
+			.SetTrans(trans);
+		tween.TweenProperty(_petSprite, "position", p6, step)
+			.SetEase(ease)
+			.SetTrans(trans);
+		tween.TweenProperty(_petSprite, "position", p7, step)
+			.SetEase(ease)
+			.SetTrans(trans);
+		tween.TweenProperty(_petSprite, "position", p8, step)
+			.SetEase(ease)
+			.SetTrans(trans);
+		tween.TweenProperty(_petSprite, "position", p9, step)
+			.SetEase(ease)
+			.SetTrans(trans);
+		tween.TweenProperty(_petSprite, "position", p10, step)
+			.SetEase(ease)
+			.SetTrans(trans);
+		tween.TweenProperty(_petSprite, "position", p11, step)
+			.SetEase(ease)
+			.SetTrans(trans);
+		tween.TweenProperty(_petSprite, "position", p12, step)
+			.SetEase(ease)
+			.SetTrans(trans);
+		tween.TweenProperty(_petSprite, "position", basePos, step)
 			.SetEase(ease)
 			.SetTrans(trans);
 	}
