@@ -41,6 +41,9 @@ public partial class Main : Control
 	private TextureRect _petSprite = null!;
 	private Vector2 _petBasePosition;
 	private Tween? _idleTween;
+	private AudioStreamPlayer _bgmGame = null!;
+	private AudioStreamPlayer _bgmDeath = null!;
+	private bool _deathMusicPlayed;
 
 	private Button _alimentarBtn = null!;
 	private Button _brincarBtn = null!;
@@ -61,6 +64,8 @@ public partial class Main : Control
 		_estadoLabel = GetNode<Label>("MarginContainer/VBoxContainer/EstadoLabel");
 		_diaLabel = GetNode<Label>("MarginContainer/VBoxContainer/DiaLabel");
 		_petSprite = GetNode<TextureRect>("MarginContainer/VBoxContainer/PetCenter/PetHolder/PetSprite");
+		_bgmGame = GetNode<AudioStreamPlayer>("MarginContainer/BgmGame");
+		_bgmDeath = GetNode<AudioStreamPlayer>("MarginContainer/BgmDeath");
 
 		StartIdleAnimation();
 
@@ -337,6 +342,12 @@ public partial class Main : Control
 		{
 			_idleTween?.Kill();
 			_petSprite.Position = _petBasePosition;
+			if (!_deathMusicPlayed)
+			{
+				_bgmGame.Stop();
+				_bgmDeath.Play();
+				_deathMusicPlayed = true;
+			}
 		}
 		
 		// Se o pet está desmaiado, mostra o sprite de desmaiado
@@ -413,7 +424,7 @@ public partial class Main : Control
 		var ease = Tween.EaseType.InOut;
 		var trans = Tween.TransitionType.Sine;
 		var dx = 6f;
-		var dy = 4f;
+		var dy = 6f;
 		var basePos = _petBasePosition;
 
 		var p1 = basePos + new Vector2(dx, 0);

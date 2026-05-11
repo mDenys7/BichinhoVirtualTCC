@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://5g1vdm8wyx5h"]
+[gd_scene load_steps=4 format=3 uid="uid://5g1vdm8wyx5h"]
 
 [ext_resource type="Script" uid="uid://duiqdq5boqnui" path="res://Main.cs" id="1_6x2rh"]
+[ext_resource type="AudioStream" uid="uid://8cnuvswynl1g" path="res://audio/Paws_in_the_Clover.mp3" id="2_uu6xs"]
+[ext_resource type="AudioStream" uid="uid://dua3tqvloht2k" path="res://audio/Empty_Chairs_at_Dawn.mp3" id="3_r0du0"]
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -50,10 +52,12 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -90
-offset_top = -90
-offset_right = 90
-offset_bottom = 90
+offset_left = -90.0
+offset_top = -90.0
+offset_right = 90.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
 expand_mode = 1
 stretch_mode = 5
 
@@ -92,3 +96,13 @@ text = "Save Game"
 [node name="VoltarMenuBtn" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Voltar ao Menu"
+
+[node name="BgmGame" type="AudioStreamPlayer" parent="MarginContainer"]
+stream = ExtResource("2_uu6xs")
+volume_db = -10.0
+autoplay = true
+parameters/looping = true
+
+[node name="BgmDeath" type="AudioStreamPlayer" parent="MarginContainer"]
+stream = ExtResource("3_r0du0")
+volume_db = -8.0

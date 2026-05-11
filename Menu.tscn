@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://bsynx5ofw5evp"]
 
-[ext_resource type="Script" path="res://Menu.cs" id="1_u8p5r"]
+[ext_resource type="Script" uid="uid://dpnqax5tj5lf3" path="res://Menu.cs" id="1_u8p5r"]
+[ext_resource type="AudioStream" uid="uid://dx3ptx72m2kpr" path="res://audio/Sunlight_on_the_Path.mp3" id="2_5yleq"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -40,25 +41,29 @@ theme_override_constants/separation = 16
 
 [node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
-text = "Bichinho Virtual"
 theme_override_font_sizes/font_size = 48
+text = "Bichinho Virtual"
 
 [node name="NewGameBtn" type="Button" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
 text = "Novo Jogo"
-custom_minimum_size = Vector2(300, 50)
 
 [node name="LoadGameBtn" type="Button" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
 text = "Continuar"
-custom_minimum_size = Vector2(300, 50)
 
 [node name="ExitBtn" type="Button" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
 text = "Sair"
-custom_minimum_size = Vector2(300, 50)
 
 [node name="StatusLabel" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
-text = ""
 
+[node name="Musica Menu" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_5yleq")
+volume_db = -8.0
+autoplay = true
+parameters/looping = true
