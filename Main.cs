@@ -129,7 +129,7 @@ public partial class Main : Control
 		var gameEndUtc = _startUtc + TotalGameDuration;
 		var effectiveNowUtc = nowUtc > gameEndUtc ? gameEndUtc : nowUtc;
 
-		// Limita o progresso offline a no máximo 5 dias
+		// Limita o progresso offline a no máximo 3 dias
 		var maxOfflineTime = _startUtc + TotalGameDuration;
 		if (effectiveNowUtc > maxOfflineTime)
 		{
