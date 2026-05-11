@@ -72,7 +72,7 @@ public partial class Menu : Control
 		try
 		{
 			GD.Print("DEBUG: Botão 'Continuar' clicado!");
-			var error = GetTree().ChangeSceneToFile("res://Game.tscn");
+			var error = GetTree().ChangeSceneToFile("res://Main.tscn");
 			GD.Print($"DEBUG: ChangeSceneToFile retornou: {error}");
 
 			if (error != Error.Ok)

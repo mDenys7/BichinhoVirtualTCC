@@ -55,6 +55,7 @@ public partial class Main : Control
 	private DateTime _startUtc;
 	private DateTime _lastSeenUtc;
 	private Texture2D[] _petDayTextures = Array.Empty<Texture2D>();
+	private Texture2D? _fallbackTexture;
 
 	public override void _Ready()
 	{
@@ -247,7 +248,7 @@ public partial class Main : Control
 		else
 		{
 			_estadoLabel.Text = _pet.IsAlive
-				? $"Estado: Feliz :)\n{tempoRestante}"
+				? $"Estado: {GetEstadoTexto()}\n{tempoRestante}"
 				: $"Estado: O pet desmaiou!\n{tempoRestante}";
 		}
 
@@ -326,6 +327,20 @@ public partial class Main : Control
 		for (var i = 0; i < PetSpritePaths.Length; i++)
 		{
 			_petDayTextures[i] = ResourceLoader.Load<Texture2D>(PetSpritePaths[i]);
+			if (_petDayTextures[i] == null)
+			{
+				GD.PushWarning($"Falha ao carregar sprite: {PetSpritePaths[i]}");
+			}
+		}
+
+		_fallbackTexture = null;
+		for (var i = 0; i < _petDayTextures.Length; i++)
+		{
+			if (_petDayTextures[i] != null)
+			{
+				_fallbackTexture = _petDayTextures[i];
+				break;
+			}
 		}
 	}
 
@@ -386,7 +401,33 @@ public partial class Main : Control
 			}
 		}
 
+		if (_fallbackTexture != null)
+		{
+			_petSprite.Texture = _fallbackTexture;
+			return;
+		}
+
 		GD.PushWarning("Nenhum sprite de evolucao foi carregado em res://sprites.");
+	}
+
+	private string GetEstadoTexto()
+	{
+		if (_pet.Fome <= 30)
+		{
+			return "Com fome";
+		}
+
+		if (_pet.Energia <= 20)
+		{
+			return "Cansado";
+		}
+
+		if (_pet.Felicidade <= 40)
+		{
+			return "Triste";
+		}
+
+		return "Feliz :)";
 	}
 
 	private int GetCurrentDayIndex()
