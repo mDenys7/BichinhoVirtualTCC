@@ -121,6 +121,24 @@ public class PetStatusTests
     }
 
     [Test]
+    public void ActionSequence_StopsChangingStateAfterPetDies()
+    {
+        var pet = new PetStatus();
+        pet.LoadStatus(5, 5, 5);
+
+        pet.Brincar();
+        pet.Dormir();
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(pet.Fome, Is.EqualTo(0));
+            Assert.That(pet.Felicidade, Is.EqualTo(25));
+            Assert.That(pet.Energia, Is.EqualTo(0));
+            Assert.That(pet.IsAlive, Is.False);
+        });
+    }
+
+    [Test]
     public void ApplyElapsed_AppliesExpectedDecayForElapsedTime()
     {
         var pet = new PetStatus();
@@ -133,6 +151,21 @@ public class PetStatusTests
             Assert.That(pet.Felicidade, Is.EqualTo(97));
             Assert.That(pet.Energia, Is.EqualTo(98));
             Assert.That(pet.IsAlive, Is.True);
+        });
+    }
+
+    [Test]
+    public void ApplyElapsed_IgnoresIncompleteTick()
+    {
+        var pet = new PetStatus();
+
+        pet.ApplyElapsed(TimeSpan.FromSeconds(1), 2.0);
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(pet.Fome, Is.EqualTo(100));
+            Assert.That(pet.Felicidade, Is.EqualTo(100));
+            Assert.That(pet.Energia, Is.EqualTo(100));
         });
     }
 
@@ -150,6 +183,23 @@ public class PetStatusTests
             Assert.That(pet.Felicidade, Is.EqualTo(41));
             Assert.That(pet.Energia, Is.EqualTo(14));
             Assert.That(pet.IsAlive, Is.True);
+        });
+    }
+
+    [Test]
+    public void ApplyElapsed_StopsProcessingAfterPetDies()
+    {
+        var pet = new PetStatus();
+        pet.LoadStatus(1, 100, 100);
+
+        pet.ApplyElapsed(TimeSpan.FromDays(1), 2.0);
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(pet.Fome, Is.EqualTo(0));
+            Assert.That(pet.Felicidade, Is.EqualTo(99));
+            Assert.That(pet.Energia, Is.EqualTo(99));
+            Assert.That(pet.IsAlive, Is.False);
         });
     }
 
@@ -209,6 +259,24 @@ public class PetStatusTests
     {
         var pet = new PetStatus();
         pet.LoadStatus(100, 20, 20);
+
+        Assert.That(pet.GetFinalState(), Is.EqualTo(PetStatus.FinalState.Evil));
+    }
+
+    [Test]
+    public void GetFinalState_TreatsScoreOf60AsGood()
+    {
+        var pet = new PetStatus();
+        pet.LoadStatus(25, 100, 50);
+
+        Assert.That(pet.GetFinalState(), Is.EqualTo(PetStatus.FinalState.Good));
+    }
+
+    [Test]
+    public void GetFinalState_TreatsScoreOf30AsEvil()
+    {
+        var pet = new PetStatus();
+        pet.LoadStatus(100, 40, 100);
 
         Assert.That(pet.GetFinalState(), Is.EqualTo(PetStatus.FinalState.Evil));
     }
