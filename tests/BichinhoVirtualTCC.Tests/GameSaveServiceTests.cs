@@ -24,6 +24,7 @@ public class GameSaveServiceTests
     }
 
     [Test]
+    [Category("Regression")]
     public void Save_CreatesDirectoryAndRoundTripsData()
     {
         var path = Path.Combine(_tempDirectory, "nested", "pet_save.json");
@@ -52,6 +53,7 @@ public class GameSaveServiceTests
     }
 
     [Test]
+    [Category("Regression")]
     public void Load_ReturnsNullWhenFileDoesNotExist()
     {
         var path = Path.Combine(_tempDirectory, "missing.json");
@@ -62,6 +64,7 @@ public class GameSaveServiceTests
     }
 
     [Test]
+    [Category("Regression")]
     public void Load_ReturnsNullWhenJsonIsInvalid()
     {
         var path = Path.Combine(_tempDirectory, "invalid.json");

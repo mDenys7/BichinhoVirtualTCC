@@ -37,6 +37,12 @@ Para executar os testes unitarios, rode o projeto de testes isolado:
 dotnet test ".\tests\BichinhoVirtualTCC.Tests\BichinhoVirtualTCC.Tests.csproj" --nologo
 ```
 
+Para executar apenas a suite curta de regressao:
+
+```powershell
+dotnet test ".\tests\BichinhoVirtualTCC.Tests\BichinhoVirtualTCC.Tests.csproj" --filter "TestCategory=Regression" --nologo
+```
+
 Observacao: a suite foi isolada do build do Godot e compila somente `PetStatus.cs`, o que deixa a execucao mais rapida e mais previsivel para medir os resultados do TCC.
 
 ## Fluxo do jogo

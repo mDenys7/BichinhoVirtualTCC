@@ -7,6 +7,7 @@ namespace BichinhoVirtualTCC.Tests;
 public class PetStatusTests
 {
     [Test]
+    [Category("Regression")]
     public void NewPet_StartsWithFullStatusAndAlive()
     {
         var pet = new PetStatus();
@@ -54,6 +55,7 @@ public class PetStatusTests
     }
 
     [Test]
+    [Category("Regression")]
     public void Alimentar_IncreasesHungerAndCostsEnergy()
     {
         var pet = new PetStatus();
@@ -70,6 +72,7 @@ public class PetStatusTests
     }
 
     [Test]
+    [Category("Regression")]
     public void Brincar_IncreasesHappinessAndConsumesHungerAndEnergy()
     {
         var pet = new PetStatus();
@@ -86,6 +89,7 @@ public class PetStatusTests
     }
 
     [Test]
+    [Category("Regression")]
     public void Dormir_RecoversEnergyWithoutExceedingMaximum()
     {
         var pet = new PetStatus();
@@ -139,6 +143,7 @@ public class PetStatusTests
     }
 
     [Test]
+    [Category("Regression")]
     public void ApplyElapsed_AppliesExpectedDecayForElapsedTime()
     {
         var pet = new PetStatus();
@@ -237,6 +242,7 @@ public class PetStatusTests
     }
 
     [Test]
+    [Category("Regression")]
     public void GetFinalState_ReturnsGoodForHighScore()
     {
         var pet = new PetStatus();

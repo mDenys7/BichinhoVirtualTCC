@@ -8,6 +8,7 @@ public class OfflineProgressCalculatorTests
     private static readonly TimeSpan TotalGameDuration = TimeSpan.FromDays(3);
 
     [Test]
+    [Category("Regression")]
     public void Calculate_ReturnsElapsedSinceLastSeenWhenWithinCycle()
     {
         var saveData = new GameSaveData
@@ -27,6 +28,7 @@ public class OfflineProgressCalculatorTests
     }
 
     [Test]
+    [Category("Regression")]
     public void Calculate_CapsProgressAtEndOfCycle()
     {
         var saveData = new GameSaveData
