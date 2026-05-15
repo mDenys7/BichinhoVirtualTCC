@@ -1,8 +1,8 @@
+#nullable enable
+
 using Godot;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 
 namespace BichinhoVirtualTCC;
 
@@ -126,23 +126,14 @@ public partial class Main : Control
 		_lastSeenUtc = saveData.LastSeenUtc;
 		_pet.LoadStatus(saveData.Fome, saveData.Felicidade, saveData.Energia);
 
-		var gameEndUtc = _startUtc + TotalGameDuration;
-		var effectiveNowUtc = nowUtc > gameEndUtc ? gameEndUtc : nowUtc;
+		var offlineProgress = OfflineProgressCalculator.Calculate(saveData, nowUtc, TotalGameDuration);
 
-		// Limita o progresso offline a no máximo 3 dias
-		var maxOfflineTime = _startUtc + TotalGameDuration;
-		if (effectiveNowUtc > maxOfflineTime)
+		if (offlineProgress.ElapsedToApply > TimeSpan.Zero)
 		{
-			effectiveNowUtc = maxOfflineTime;
+			_pet.ApplyElapsed(offlineProgress.ElapsedToApply, TickSeconds);
 		}
 
-		// Não aplica progresso se o jogo ainda não passou nenhum tempo
-		if (_lastSeenUtc < effectiveNowUtc && effectiveNowUtc - _lastSeenUtc > TimeSpan.Zero)
-		{
-			_pet.ApplyElapsed(effectiveNowUtc - _lastSeenUtc, TickSeconds);
-		}
-
-		_lastSeenUtc = effectiveNowUtc;
+		_lastSeenUtc = offlineProgress.EffectiveNowUtc;
 	}
 
 	private void OnStatusTick()
@@ -268,7 +259,7 @@ public partial class Main : Control
 
 		_lastSeenUtc = nowUtc;
 
-		var data = new SaveData
+		var data = new GameSaveData
 		{
 			StartUtc = _startUtc,
 			LastSeenUtc = _lastSeenUtc,
@@ -277,43 +268,12 @@ public partial class Main : Control
 			Energia = _pet.Energia
 		};
 
-		var json = JsonSerializer.Serialize(data);
-		File.WriteAllText(GetSavePath(), json);
+		GameSaveService.Save(GetSavePath(), data);
 	}
 
-	private static SaveData LoadGame()
+	private static GameSaveData? LoadGame()
 	{
-		var path = GetSavePath();
-		if (!File.Exists(path))
-		{
-			return null;
-		}
-
-		try
-		{
-			var json = File.ReadAllText(path);
-			var data = JsonSerializer.Deserialize<SaveData>(json);
-			if (data is null)
-			{
-				return null;
-			}
-
-			if (data.StartUtc == default || data.LastSeenUtc == default)
-			{
-				return null;
-			}
-
-			if (data.LastSeenUtc < data.StartUtc)
-			{
-				data.LastSeenUtc = data.StartUtc;
-			}
-
-			return data;
-		}
-		catch
-		{
-			return null;
-		}
+		return GameSaveService.Load(GetSavePath());
 	}
 
 	private static string GetSavePath()
@@ -522,12 +482,4 @@ public partial class Main : Control
 			.SetTrans(trans);
 	}
 
-	private sealed class SaveData
-	{
-		public DateTime StartUtc { get; set; }
-		public DateTime LastSeenUtc { get; set; }
-		public int Fome { get; set; }
-		public int Felicidade { get; set; }
-		public int Energia { get; set; }
-	}
 }

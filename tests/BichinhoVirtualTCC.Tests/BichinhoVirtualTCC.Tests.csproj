@@ -18,6 +18,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="..\..\GameSaveData.cs" Link="GameSaveData.cs" />
+    <Compile Include="..\..\GameSaveService.cs" Link="GameSaveService.cs" />
+    <Compile Include="..\..\OfflineProgressCalculator.cs" Link="OfflineProgressCalculator.cs" />
+    <Compile Include="..\..\OfflineProgressResult.cs" Link="OfflineProgressResult.cs" />
     <Compile Include="..\..\PetStatus.cs" Link="PetStatus.cs" />
   </ItemGroup>
 </Project>

@@ -27,6 +27,9 @@ Projeto minimo de pet virtual com 3 atributos:
   - degradacao por tempo (`Tick` e `ApplyElapsed`)
   - penalidades por fome/energia baixas
   - classificacao final (`Good`, `Neutral`, `Evil`)
+  - persistencia de save/load (`GameSaveService`)
+  - arquivo ausente, invalido e normalizacao de datas do save
+  - calculo de progresso offline com limite do ciclo
 
 Para executar os testes unitarios, rode o projeto de testes isolado:
 
