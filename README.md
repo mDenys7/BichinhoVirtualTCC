@@ -17,6 +17,25 @@ Projeto minimo de pet virtual com 3 atributos:
 2. Confirme que a cena inicial esta como `res://Menu.tscn`.
 3. Execute o projeto (`F5`).
 
+## Testes unitarios
+- Projeto de testes: `tests/BichinhoVirtualTCC.Tests`
+- Escopo inicial: regras de negocio de `PetStatus.cs`
+- Cobertura atual:
+  - estado inicial e reset
+  - limites de atributos
+  - acoes `Alimentar`, `Brincar` e `Dormir`
+  - degradacao por tempo (`Tick` e `ApplyElapsed`)
+  - penalidades por fome/energia baixas
+  - classificacao final (`Good`, `Neutral`, `Evil`)
+
+Para executar os testes unitarios, rode o projeto de testes isolado:
+
+```powershell
+dotnet test ".\tests\BichinhoVirtualTCC.Tests\BichinhoVirtualTCC.Tests.csproj" --nologo
+```
+
+Observacao: a suite foi isolada do build do Godot e compila somente `PetStatus.cs`, o que deixa a execucao mais rapida e mais previsivel para medir os resultados do TCC.
+
 ## Fluxo do jogo
 1. **Menu inicial**: Clique em "Novo Jogo" para iniciar do zero, "Continuar" para carregar partida anterior, ou "Sair" para fechar.
 2. **Gameplay**: 
