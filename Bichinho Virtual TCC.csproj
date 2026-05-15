@@ -8,5 +8,6 @@
   <ItemGroup>
     <Content Include="Main.tscn" />
     <Content Include="README.md" />
+    <Content Include="TCC_CONTEXT.md" />
   </ItemGroup>
 </Project>

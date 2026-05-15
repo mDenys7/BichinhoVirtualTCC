@@ -34,7 +34,7 @@ alignment = 1
 [node name="DiaLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "Dia: 1/5"
+text = "Dia: 1/3"
 
 [node name="PetCenter" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
