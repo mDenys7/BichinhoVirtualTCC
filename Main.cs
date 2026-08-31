@@ -8,7 +8,7 @@ namespace BichinhoVirtualTCC;
 
 public partial class Main : Control
 {
-	private const double TickSeconds = 2.0;
+	private const double TickSeconds = 1.0;
 	private static readonly TimeSpan TotalGameDuration = TimeSpan.FromDays(3);
 	private const string SaveFileName = "pet_save.json";
 	private static readonly string[] PetSpritePaths =
