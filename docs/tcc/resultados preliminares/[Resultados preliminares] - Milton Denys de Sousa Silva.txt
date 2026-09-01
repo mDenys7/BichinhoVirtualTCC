@@ -1,0 +1,314 @@
+﻿Automação de Testes em Jogos Digitais: Impacto na Qualidade e Eficiência 
+
+
+Milton Denys de Sousa Silva; Diego Marques De Carvalho
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+Resumo 
+
+Este trabalho apresenta a implementação de testes automatizados no protótipo Bichinho 
+Virtual, desenvolvido em Godot 4.3, com o objetivo de analisar o impacto da automação na 
+validação de software em jogos digitais. A metodologia envolveu 30 testes unitários em C# e 
+9 testes manuais em formato BDD, distribuídos entre lógica de atributos, persistência de 
+dados e evolução offline.
+Os resultados preliminares indicam que a suíte automatizada foi executada em média em 
+2,5 segundos, enquanto os testes manuais demandaram cerca de 13 horas para os mesmos 
+cenários. Além da diferença de tempo, a automação apresentou maior repetibilidade e 
+consistência nas execuções.
+Conclui-se que, neste protótipo, a automação de testes mostrou-se uma abordagem 
+eficiente para apoiar a validação de lógica em jogos digitais.
+
+Palavras-chave: Automação de testes; Testes unitários; Jogos digitais; C#; Controle de 
+qualidade.
+
+Introdução
+
+A indústria de desenvolvimento de software, incluindo jogos digitais, enfrenta o desafio de 
+manter a qualidade sem comprometer a velocidade de entrega. Nesse contexto, testes 
+automatizados tornam-se uma estratégia importante para reduzir tempo e custo de 
+validação, além de minimizar regressões. Em jogos digitais, essa necessidade é ainda mais 
+relevante devido à presença de mecânicas dinâmicas e estados variáveis.
+Estudos como os de Pressman (2010) destacam a importância da automação de testes, 
+enquanto Singh e Kaur (2019) indicam ganhos significativos de tempo em sistemas com 
+lógica complexa. Apesar disso, ainda há pouca evidência prática sobre o impacto da 
+automação em protótipos de jogos digitais.
+Diante disso, este trabalho analisa o uso de testes automatizados no protótipo Bichinho 
+Virtual, desenvolvido em Godot 4.3 com lógica em C#. O estudo compara testes 
+automatizados e manuais em cenários equivalentes, buscando mensurar diferenças de 
+tempo, consistência e eficiência na validação da aplicação.
+
+Metodologia
+
+Este trabalho adotou uma abordagem experimental com coleta de dados quantitativos. O 
+protótipo Bichinho Virtual foi desenvolvido em Godot 4.3, com a lógica principal 
+implementada em C#, o que permitiu a criação de testes isolados e automatizados. A 
+estrutura do jogo é composta por três atributos principais — fome, energia e felicidade —, 
+três ações do jogador — alimentar, brincar e dormir — e um sistema de persistência em 
+JSON. O ciclo do pet é baseado em tempo real, com atualização periódica e degradação 
+gradual dos atributos conforme o tempo decorrido.
+
+Ferramentas e Tecnologias
+
+Os testes foram desenvolvidos utilizando:
+- Framework: NUnit 4.x
+- Linguagem: C#
+- Runtime: .NET 9.0
+- Engine: Godot 4.3
+- Ambiente: Windows 11
+
+Estrutura dos Testes Automatizados
+
+Foram criadas 3 classes de testes:
+
+1. PetStatusTests.cs (19 testes)
+   - Testa lógica de atributos
+   - Cobre ações do jogador (alimentar, brincar, dormir)
+   - Valida limites (0-100)
+   - Testa estados finais (Good, Neutral, Evil)
+
+2. GameSaveServiceTests.cs (7 testes)
+   - Testa persistência de dados
+   - Valida save/load de estados
+   - Trata erros (arquivo ausente, inválido)
+   - Testa fallback seguro
+
+3. OfflineProgressCalculatorTests.cs (4 testes)
+   - Testa cálculo de evolução offline
+   - Valida limite de progresso por ciclo
+   - Testa ausência de duplicação de progresso
+
+Total: 30 testes automatizados
+Suíte de regressão: 11 testes críticos marcados com [Category("Regression")]
+
+Execução dos Testes Automatizados
+
+Comando suíte completa:
+dotnet test ".\tests\BichinhoVirtualTCC.Tests\BichinhoVirtualTCC.Tests.csproj" --nologo
+
+Comando suíte de regressão:
+dotnet test --filter "TestCategory=Regression" --nologo
+
+Os testes foram executados em 3 iterações para coleta de dados de repetibilidade.
+
+
+
+
+
+
+
+
+
+
+Testes Manuais para Comparação
+
+
+
+
+
+Cenário 
+Tempo (min) 
+Resultado 
+Observação 
+Data 
+Estado Inicial 
+2 min 20 s
+Pass 
+Atributos iniciam em 100 
+04/06/2026 
+Alimentar 
+1 min 48 s
+Pass 
+Fome +20, Energia -4 
+04/06/2026 
+Brincar 
+4 min 17 s
+Fail 
+Bug: Felicidade não altera 
+04/06/2026 
+Dormir 
+1 min 28 s
+Fail 
+Bug: Felicidade não altera 
+04/06/2026 
+Limite Máximo 
+1 min 30 s
+Pass 
+Nenhum atributo ultrapassa 100 
+04/06/2026 
+Limite Mínimo 
+1 min 23 s
+Pass 
+Nenhum atributo fica abaixo de 0 
+04/06/2026 
+Save/Load 
+1 min 18 s
+Pass 
+Estado restaurado corretamente 
+04/06/2026 
+Evolução Offline 
+32 min 50 s 
+Pass 
+Degradação aplicada após 30 minutos 
+04/06/2026 
+Ciclo Completo 
+12 h 30 min
+Pass 
+Degradação aplicada após 12 horas 
+05/06/2026
+
+
+Para fins comparativos, foram definidos 9 cenários manuais no formato BDD (Behavior-
+Driven Development), cobrindo os principais fluxos funcionais do protótipo:
+estado inicial do pet;
+ação de alimentar;
+ação de brincar;
+ação de dormir;
+validação de limite máximo dos atributos;
+validação de limite mínimo dos atributos;
+salvamento e carregamento de estado;
+evolução offline;
+ciclo completo de evolução visual.
+Esses cenários permitiram comparar o comportamento funcional obtido manualmente com o 
+resultado da execução automatizada, considerando tempo de execução, consistência e 
+esforço necessário para validação.
+
+
+
+
+
+
+
+
+
+
+Resultados Preliminares
+
+Foram realizadas três execuções suíte completa de testes automatizados, com 30 
+testes em cada execução (total de 90 testes). Todas as execuções alcançaram 100% 
+de sucesso. Adicionalmente, foi executada a suíte de regressão, composta pelos 11 
+testes críticos identificados dentro da suíte completa, que também apresentou 100% 
+de aprovação.	
+
+Execução
+Data
+Total
+Passaram
+Falharam
+Tempo (s)
+1
+4/6/2026
+30
+30
+0
+2.6
+2
+5/6/2026
+30
+30
+0
+2.4
+3
+6/6/2026
+30
+30
+0
+1.7
+
+
+Taxa de sucesso: 100%
+Tempo médio da suíte completa: 2,5 segundos
+Tempo da suíte de regressão: 1,0 segundo
+Consistência: alta, sem falhas nas execuções observadas
+
+      Execução dos Testes Manuais
+
+Foram executados nove cenários manuais em formato BDD, abrangendo o estado 
+inicial, as ações do jogador, os limites dos atributos, save/load, evolução offline e 
+ciclo completo do pet.
+
+Comparação: Manual vs Automatizado
+
+A comparação indicou diferença significativa entre os métodos, com maior rapidez e 
+repetibilidade nos testes automatizados. A suíte automatizada apresentou execução 
+em 2,5 segundos, enquanto os testes manuais demandaram aproximadamente 13 
+horas.
+
+Bugs Encontrados
+ID
+Cenário
+Problema
+Encontrado por
+Corrigido
+1
+Brincar
+Felicidade não 
+aumenta
+Manual
+Não
+2
+Dormir
+Felicidade não 
+aumenta
+Manual
+Não
+
+Considerações Finais
+
+Os resultados deste trabalho indicam que a automação de testes é uma abordagem viável e 
+eficiente para a validação da lógica em jogos digitais. A suíte de 30 testes automatizados 
+cobriu as principais funcionalidades do protótipo Bichinho Virtual e foi executada com 100% 
+de sucesso nas rodadas observadas, em tempo reduzido quando comparado ao processo 
+manual.
+A comparação entre testes automatizados e manuais evidenciou diferenças relevantes em 
+velocidade, repetibilidade, consistência e esforço operacional. Enquanto a automação 
+permitiu execuções rápidas e reproduzíveis, os testes manuais demandaram maior tempo, 
+maior intervenção e maior suscetibilidade a variações no processo de validação.
+Entre os principais desafios enfrentados, destacam-se a estruturação inicial dos testes, a 
+adaptação da lógica para permitir validação isolada e a organização de cenários 
+equivalentes entre execução automatizada e manual. Ainda assim, os resultados 
+preliminares sugerem que a automação pode contribuir de forma significativa para aumentar 
+a confiabilidade do processo de teste em jogos digitais com regras bem definidas.
+Como trabalhos futuros, recomenda-se:
+ampliar a cobertura para testes de interface;
+implementar testes de desempenho;
+integrar a automação a um pipeline de CI/CD;
+investigar o impacto da automação em projetos maiores e em contextos de equipes ágeis.
+Conclui-se que, no contexto deste protótipo, a automação de testes contribuiu para 
+aumentar a eficiência e a confiabilidade do processo de validação, demonstrando potencial 
+para apoiar o desenvolvimento de jogos digitais com maior qualidade
+
+Referências
+PRESSMAN, R. S. Software Engineering: A Practitioner's Approach. 7. ed. McGraw-Hill, 
+2010.
+SINGH, R.; KAUR, L. Test Automation Framework: Towards Improving Software Quality. 
+International Journal of Computer Applications, v. 190, n. 47, p. 79-86, 2019.
+
+Trabalho de Conclusão de Curso apresentado para obtenção do título 
+de especialista em Engenharia de Software – 2026 
+
+
+
+1
+
+
+
+
