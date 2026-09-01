@@ -1,0 +1,79 @@
+﻿Trabalho de Conclusão de Curso apresentado para obtenção do título de especialista em 
+Engenharia de Software – 2026
+ 
+
+Automação de Testes Aplicada ao Desenvolvimento de Jogos Digitais
+ 
+
+Milton Denys de Sousa Silva¹*; Diego Marques de Carvalho²
+1* Engenheiro de Software. E-mail: seuemail@email.com 
+2 Orientador. E-mail: orientador@email.com
+ 
+Automação de Testes Aplicada ao Desenvolvimento de Jogos Digitais
+Resumo
+O avanço das tecnologias de desenvolvimento de jogos digitais criou novos desafios 
+relacionados à garantia de qualidade e manutenção contínua dos sistemas. Este trabalho 
+investiga estratégias de automação de testes aplicadas ao desenvolvimento de jogos 
+digitais, utilizando a implementação de um jogo protótipo 2D como ambiente 
+experimental. Foram avaliadas métricas técnicas como quantidade de bugs detectados, 
+tempo de correção, estabilidade das versões e cobertura de testes antes e depois da 
+automação. Os resultados buscam contribuir para o entendimento do impacto da 
+automação no processo de desenvolvimento de jogos, validando práticas que aumentam a 
+confiabilidade e produtividade, sem envolver participação humana direta.
+Palavras-chave: qualidade de software; automação de testes; jogos digitais; 
+desenvolvimento de software; testes automatizados.
+Introdução
+A crescente complexidade dos jogos digitais torna o processo de desenvolvimento 
+suscetível a falhas, custos elevados de manutenção e desafios de escalabilidade. No 
+contexto de Engenharia de Software, a busca por mecanismos de garantia de qualidade é 
+fundamental para a entrega de produtos confiáveis e eficientes (Santos et al., 2021).
+Em jogos digitais, a automatização dos testes surge como solução promissora para 
+aumentar a qualidade e acelerar o ciclo de desenvolvimento, mitigando riscos de 
+regressões e falhas funcionais em ambientes de rápida evolução (Ghafari et al., 2020). No 
+entanto, ainda são escassos os estudos que mensurem o impacto da automação em 
+projetos de jogos, notadamente na melhoria objetiva de métricas técnicas relevantes.
+Diante desse cenário, este trabalho propõe como objetivo avaliar o impacto da automação 
+de testes no processo de desenvolvimento de jogos digitais, por meio da implementação 
+sistematizada de scripts de teste e análise comparativa de métricas de qualidade, 
+produtividade e estabilidade do produto.
+Metodologia
+Este trabalho se caracteriza como uma pesquisa aplicada, de abordagem quantitativa e 
+delineamento experimental. Um jogo digital 2D será desenvolvido como ambiente de 
+teste, utilizando frameworks e motores de desenvolvimento amplamente empregados no 
+mercado (por exemplo, Unity ou Godot).
+Inicialmente, será realizado o desenvolvimento iterativo das funcionalidades básicas do 
+jogo sem automação de testes, documentando bugs encontrados, correções e o tempo 
+investido.
+Na etapa seguinte, serão implementados scripts de testes automatizados para funções-
+chave do jogo (lógica, movimentação, mecânicas principais). Métricas técnicas como 
+quantidade de bugs detectados, tempo médio de correção, estabilidade pós-atualizações e 
+cobertura de testes automatizados serão registradas e comparadas ao cenário sem 
+automação.
+Os dados serão organizados em tabelas e gráficos, analisados estatisticamente e 
+discutidos à luz da literatura relevante. Não haverá participação de seres humanos nem 
+coleta de dados pessoais.
+Resultados Preliminares
+Até o momento, foi realizada a etapa inicial de desenvolvimento do jogo protótipo 2D, 
+contemplando a implementação das funcionalidades básicas, como movimentação do 
+personagem, sistema de colisão e mecânicas principais.
+Durante essa fase sem automação de testes, foram registrados bugs relacionados à lógica 
+de movimentação e inconsistências no comportamento de colisões. O tempo médio de 
+correção foi documentado, evidenciando retrabalho em funcionalidades já 
+implementadas.
+Além disso, iniciou-se a estruturação do ambiente de testes automatizados utilizando a 
+engine selecionada, com a implementação dos primeiros scripts de validação para 
+funcionalidades críticas.
+Os dados preliminares indicam potencial redução no retrabalho e maior controle sobre a 
+estabilidade do sistema, embora a análise comparativa completa ainda esteja em 
+andamento.
+Conclusão
+Os resultados preliminares indicam que a automação de testes possui potencial para 
+melhorar a qualidade e estabilidade no desenvolvimento de jogos digitais. No entanto, 
+análises mais aprofundadas serão realizadas nas próximas etapas do estudo.
+Referências
+Ghafari, M.; Gross, T.; Fucci, D.; Felderer, M. (2020). Why research on test-driven 
+development is inconclusive? Empirical Software Engineering and Measurement.
+Santos, A.; Vegas, S.; Dieste, O.; Uyaguari, F. (2021). A family of experiments on test-
+driven development. Empirical Software Engineering, 26(42).
+Newman, S. (2022). Criando Microsserviços: Projetando Sistemas com Componentes 
+Menores e Mais Especializados. 2ed. Editora Novatec.
