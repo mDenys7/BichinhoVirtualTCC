@@ -788,11 +788,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Godot\\bichinho-virtual-tcc\\tests\\BichinhoVirtualTCC.Tests\\BichinhoVirtualTCC.Tests.csproj",
+      "projectUniqueName": "C:\\Users\\Milton Denys\\.copilot\\repos\\BichinhoVirtualTCC\\tests\\BichinhoVirtualTCC.Tests\\BichinhoVirtualTCC.Tests.csproj",
       "projectName": "BichinhoVirtualTCC.Tests",
-      "projectPath": "D:\\Godot\\bichinho-virtual-tcc\\tests\\BichinhoVirtualTCC.Tests\\BichinhoVirtualTCC.Tests.csproj",
+      "projectPath": "C:\\Users\\Milton Denys\\.copilot\\repos\\BichinhoVirtualTCC\\tests\\BichinhoVirtualTCC.Tests\\BichinhoVirtualTCC.Tests.csproj",
       "packagesPath": "C:\\Users\\Milton Denys\\.nuget\\packages\\",
-      "outputPath": "D:\\Godot\\bichinho-virtual-tcc\\tests\\BichinhoVirtualTCC.Tests\\obj\\",
+      "outputPath": "C:\\Users\\Milton Denys\\.copilot\\repos\\BichinhoVirtualTCC\\tests\\BichinhoVirtualTCC.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Milton Denys\\AppData\\Roaming\\NuGet\\NuGet.Config"
