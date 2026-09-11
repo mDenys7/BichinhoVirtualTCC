@@ -286,5 +286,39 @@ public class PetStatusTests
 
         Assert.That(pet.GetFinalState(), Is.EqualTo(PetStatus.FinalState.Evil));
     }
+
+    [Test]
+    [Category("BDD-Scenario")]
+    public void Brincar_WhenHappinessIsAtMaximum_RespectsBoundaryLimit()
+    {
+        var pet = new PetStatus();
+        pet.LoadStatus(80, 100, 40);
+
+        pet.Brincar();
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(pet.Felicidade, Is.EqualTo(100), "Felicidade should stay clamped at 100");
+            Assert.That(pet.Fome, Is.EqualTo(74), "Fome should decrease by 6");
+            Assert.That(pet.Energia, Is.EqualTo(30), "Energia should decrease by 10");
+        });
+    }
+
+    [Test]
+    [Category("BDD-Scenario")]
+    public void Dormir_WhenEnergyIsAtMaximum_RespectsBoundaryLimit()
+    {
+        var pet = new PetStatus();
+        pet.LoadStatus(80, 50, 100);
+
+        pet.Dormir();
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(pet.Energia, Is.EqualTo(100), "Energia should stay clamped at 100");
+            Assert.That(pet.Fome, Is.EqualTo(70), "Fome should decrease by 10");
+            Assert.That(pet.Felicidade, Is.EqualTo(53), "Felicidade should increase by 3");
+        });
+    }
 }
 
