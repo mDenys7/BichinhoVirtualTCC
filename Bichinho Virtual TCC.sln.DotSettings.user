@@ -5,6 +5,7 @@
       &lt;TestId&gt;NUnit3x::8D4C395F-97A1-42FA-AB03-216DD2D80A91::net9.0::BichinhoVirtualTCC.Tests.PetStatusTests&lt;/TestId&gt;&#xD;
       &lt;TestId&gt;NUnit3x::8D4C395F-97A1-42FA-AB03-216DD2D80A91::net9.0::BichinhoVirtualTCC.Tests.GameSaveServiceTests&lt;/TestId&gt;&#xD;
       &lt;TestId&gt;NUnit3x::8D4C395F-97A1-42FA-AB03-216DD2D80A91::net8.0::BichinhoVirtualTCC.Tests.GameSaveServiceTests&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::8D4C395F-97A1-42FA-AB03-216DD2D80A91::net8.0::BichinhoVirtualTCC.Tests.PetStatusTests&lt;/TestId&gt;&#xD;
     &lt;/TestAncestor&gt;&#xD;
     &lt;ProjectFile&gt;8D4C395F-97A1-42FA-AB03-216DD2D80A91/f:OfflineProgressCalculatorTests.cs&lt;/ProjectFile&gt;&#xD;
   &lt;/Or&gt;&#xD;
