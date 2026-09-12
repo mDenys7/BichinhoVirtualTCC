@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BichinhoVirtualTCC.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0f85633bba226ac361bb13b2653c92b3ea84c407")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+af2dcb69ba3a296b46e8e7a286e1e2726a819bac")]
 [assembly: System.Reflection.AssemblyProductAttribute("BichinhoVirtualTCC.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BichinhoVirtualTCC.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
