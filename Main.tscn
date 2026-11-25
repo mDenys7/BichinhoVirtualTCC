@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://5g1vdm8wyx5h"]
+[gd_scene load_steps=5 format=3 uid="uid://5g1vdm8wyx5h"]
 
 [ext_resource type="Script" uid="uid://duiqdq5boqnui" path="res://Main.cs" id="1_6x2rh"]
 [ext_resource type="AudioStream" uid="uid://8cnuvswynl1g" path="res://audio/Paws_in_the_Clover.mp3" id="2_uu6xs"]
 [ext_resource type="AudioStream" uid="uid://dua3tqvloht2k" path="res://audio/Empty_Chairs_at_Dawn.mp3" id="3_r0du0"]
+[ext_resource type="PackedScene" path="res://Background.tscn" id="4_background"]
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -12,6 +13,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6x2rh")
+
+[node name="Background" parent="." instance=ExtResource("4_background")]
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
